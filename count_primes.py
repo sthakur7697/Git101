@@ -1,33 +1,29 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Sep  5 17:34:24 2019
+Created on Thu Sep  5 17:31:46 2019
 
 @author: SUNNY THAKUR
 """
-
-import math
-def is_prime(n): 
-    if n <= 1: 
-        return False
-    if n == 2: 
-        return True
-    if n > 2 and n % 2 == 0: 
-        return False
-  
-    max_div = math.floor(math.sqrt(n)) 
-    for i in range(3, 1 + max_div, 2): 
-        if n % i == 0: 
-            return False
-    return True
-
-def count_primes(num):
-    count = 0
-    for i in range(num):
-        if is_prime(i):
-            count += 1
-    return count
-
 import time
 start_time = time.time()
-print(count_primes(1000000))
+
+def count_primes(num):
+    primes = [2]
+    x = 3
+    if num < 2:
+        return 0
+    while x <= num:
+        for y in primes:  # use the primes list!
+            if x%y == 0:
+                x += 2
+                break
+        else:
+            primes.append(x)
+            x += 2
+    return len(primes)
+
+print(count_primes(10000))
 print(time.time()-start_time)
+
+# 3.5885233879089355
+# 3.9199440479278564
